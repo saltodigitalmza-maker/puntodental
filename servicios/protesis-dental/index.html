@@ -192,6 +192,7 @@ footer h4{color:#fff;font-family:var(--font-body);font-weight:700;font-size:.82r
   .has-sub.open .submenu{max-height:520px}
   .has-sub>a{width:100%}
   .has-sub>a .caret{margin-left:auto}
+  .has-sub:hover .submenu,.has-sub:focus-within .submenu{transform:none;left:auto}
   .has-sub.open .caret{transform:rotate(180deg)}
 }
 
@@ -262,6 +263,71 @@ footer h4{color:#fff;font-family:var(--font-body);font-weight:700;font-size:.82r
     gap:14px;animation:teamMarquee 22s linear infinite;overflow:visible;padding:4px 0}
   .team-grid .team-card{flex:0 0 auto!important;width:76vw;max-width:300px;scroll-snap-align:none}
   .team-card:nth-child(n+4){display:block}
+}
+
+/* ===== MEJORAS v3 (común) ===== */
+@keyframes pdCardPulse{
+  0%,100%{transform:translateY(0) scale(1);box-shadow:var(--shadow-sm)}
+  50%{transform:translateY(-3px) scale(1.012);box-shadow:0 14px 32px rgba(28,109,122,.20)}
+}
+/* (4) servicios home: mismo ícono flotante que el resto, en escritorio y mobile */
+.serv-card .sc-ic{animation:pdFloat 3.6s ease-in-out infinite}
+.serv-card:nth-child(2) .sc-ic{animation-delay:.4s}
+.serv-card:nth-child(3) .sc-ic{animation-delay:.8s}
+.serv-card:nth-child(4) .sc-ic{animation-delay:1.2s}
+.serv-card:nth-child(5) .sc-ic{animation-delay:1.6s}
+.serv-card:nth-child(6) .sc-ic{animation-delay:2s}
+.serv-card:nth-child(7) .sc-ic{animation-delay:2.4s}
+.serv-card:nth-child(8) .sc-ic{animation-delay:2.8s}
+.serv-grid .serv-card.reveal{transition-delay:.04s}
+.serv-grid .serv-card:nth-child(2).reveal{transition-delay:.10s}
+.serv-grid .serv-card:nth-child(3).reveal{transition-delay:.16s}
+.serv-grid .serv-card:nth-child(4).reveal{transition-delay:.22s}
+.serv-grid .serv-card:nth-child(5).reveal{transition-delay:.28s}
+.serv-grid .serv-card:nth-child(6).reveal{transition-delay:.34s}
+.serv-grid .serv-card:nth-child(7).reveal{transition-delay:.40s}
+.serv-grid .serv-card:nth-child(8).reveal{transition-delay:.46s}
+/* (6) menos espacio entre el equipo y la sección "Confianza"/Opiniones */
+#equipo{padding-bottom:30px}
+#opiniones{padding-top:30px}
+@media (prefers-reduced-motion: reduce){
+  .serv-card .sc-ic{animation:none!important}
+}
+
+/* ===== MEJORAS v3 (mobile) ===== */
+@media (max-width:760px){
+  /* (1) menú: todos los ítems a ancho completo y centrados */
+  .nav-links.open{align-items:stretch}
+  .nav-links.open>li{width:100%;text-align:center}
+  .nav-links.open>li>a{display:block;justify-content:center}
+  .has-sub{width:100%;text-align:center}
+  .has-sub>a{display:flex;width:100%;justify-content:center;align-items:center;gap:6px}
+  .has-sub>a .caret{margin-left:6px}
+  /* (2) submenú con fondo propio, diferenciado de los botones principales */
+  .has-sub .submenu{position:static;transform:none;opacity:1;visibility:visible;
+    box-shadow:none;border:1px solid var(--sky-2);min-width:0;width:100%;
+    background:var(--sky-3);border-radius:14px;padding:0 8px;max-height:0;overflow:hidden;
+    margin-top:0;transition:max-height .32s ease,padding .32s ease,margin-top .32s ease;
+    display:flex;flex-direction:column;align-items:stretch;gap:2px}
+  .has-sub.open .submenu{max-height:640px;padding:8px;margin-top:8px}
+  .has-sub .submenu li{width:100%}
+  .has-sub .submenu li a{display:block;width:100%;text-align:center;padding:11px 12px;
+    border-radius:9px;color:var(--ink-soft)}
+  .has-sub .submenu li a:active{background:var(--sky);color:var(--teal)}
+  .has-sub.open .caret{transform:rotate(180deg)}
+  /* (5) marquee del equipo a full-bleed (sin margen lateral) */
+  .team-marquee{margin-left:-24px;margin-right:-24px}
+  /* (3) recuadro de diferenciadores: animación constante para llamar la atención */
+  .why-grid .why-card{animation:pdCardPulse 3.4s ease-in-out infinite;transform-origin:center}
+  .why-grid .why-card:nth-child(2){animation-delay:.45s}
+  .why-grid .why-card:nth-child(3){animation-delay:.9s}
+  .why-grid .why-card:nth-child(4){animation-delay:1.35s}
+  /* (6) menos espacio antes de "Confianza" en mobile */
+  #equipo{padding-bottom:14px}
+  #opiniones{padding-top:14px}
+}
+@media (prefers-reduced-motion: reduce){
+  .why-grid .why-card{animation:none!important}
 }
 </style>
 </head>
