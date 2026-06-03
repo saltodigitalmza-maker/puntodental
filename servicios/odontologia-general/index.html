@@ -207,6 +207,62 @@ footer h4{color:#fff;font-family:var(--font-body);font-weight:700;font-size:.82r
 @media (max-width:600px){.wa-float{width:54px;height:54px;right:16px;bottom:16px}.wa-float svg{width:30px;height:30px}}
 @media (prefers-reduced-motion:reduce){.wa-float::before{animation:none}}
 .s-photo{box-shadow:0 18px 42px rgba(17,53,61,.16),0 3px 10px rgba(17,53,61,.07);border:1px solid rgba(28,109,122,.14)}
+
+/* ===== MEJORAS v2 ===== */
+/* Logo más compacto (Punto / Dental) */
+.brand>span{line-height:1.1}
+/* Flotación suave de íconos en cards de beneficios / por qué elegirnos */
+@keyframes pdFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes pdAttn{0%,90%,100%{transform:translateX(0) rotate(0)}
+  92%{transform:translateX(-3px) rotate(-.5deg)}
+  94%{transform:translateX(3px) rotate(.5deg)}
+  96%{transform:translateX(-2px) rotate(-.3deg)}
+  98%{transform:translateX(2px) rotate(.3deg)}}
+/* Beneficios (páginas de servicio): entrada escalonada + ícono flotante */
+.ben{transition:transform .5s ease, box-shadow .35s ease, opacity .6s ease}
+.ben:hover .bi{transform:scale(1.08) rotate(-4deg)}
+.ben .bi{transition:transform .4s ease}
+.ben-grid .ben.reveal{transition-delay:.04s}
+.ben-grid .ben:nth-child(2).reveal{transition-delay:.12s}
+.ben-grid .ben:nth-child(3).reveal{transition-delay:.20s}
+.ben-grid .ben:nth-child(4).reveal{transition-delay:.28s}
+.ben-grid .ben:nth-child(5).reveal{transition-delay:.36s}
+.ben-grid .ben:nth-child(6).reveal{transition-delay:.44s}
+.ben .bi{animation:pdFloat 3.6s ease-in-out infinite}
+.ben:nth-child(2) .bi{animation-delay:.5s}
+.ben:nth-child(3) .bi{animation-delay:1s}
+.ben:nth-child(4) .bi{animation-delay:1.5s}
+.ben:nth-child(5) .bi{animation-delay:2s}
+.ben:nth-child(6) .bi{animation-delay:2.5s}
+/* Why-cards (home): mismo tratamiento sobre el ícono .wc-ic */
+.why-card:hover .wc-ic{transform:scale(1.08) rotate(-4deg)}
+.why-card .wc-ic{transition:transform .4s ease;animation:pdFloat 3.6s ease-in-out infinite}
+.why-card:nth-child(2) .wc-ic{animation-delay:.5s}
+.why-card:nth-child(3) .wc-ic{animation-delay:1s}
+.why-card:nth-child(4) .wc-ic{animation-delay:1.5s}
+.why-grid .why-card.reveal{transition-delay:.04s}
+.why-grid .why-card:nth-child(2).reveal{transition-delay:.12s}
+.why-grid .why-card:nth-child(3).reveal{transition-delay:.20s}
+.why-grid .why-card:nth-child(4).reveal{transition-delay:.28s}
+/* Formulario de turno: vibración periódica para llamar la atención */
+.cta-form{animation:pdAttn 5s ease-in-out infinite;transform-origin:center}
+.cta-form:focus-within{animation:none}
+/* Marquee del equipo (solo mobile): track + clones */
+.team-marquee{overflow:hidden}
+@keyframes teamMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.team-card:nth-child(n+4){display:none}
+@media (prefers-reduced-motion: reduce){
+  .ben .bi,.why-card .wc-ic,.cta-form{animation:none!important}
+}
+
+/* ===== MEJORAS v2 — mobile ===== */
+@media (max-width:760px){
+  .team-marquee{margin-top:22px}
+  .team-grid{display:flex!important;grid-template-columns:none!important;width:max-content;
+    gap:14px;animation:teamMarquee 22s linear infinite;overflow:visible;padding:4px 0}
+  .team-grid .team-card{flex:0 0 auto!important;width:76vw;max-width:300px;scroll-snap-align:none}
+  .team-card:nth-child(n+4){display:block}
+}
 </style>
 </head>
 <body>
@@ -221,7 +277,7 @@ footer h4{color:#fff;font-family:var(--font-body);font-weight:700;font-size:.82r
   <div class="container nav">
     <a href="/" class="brand" aria-label="Punto Dental, inicio">
       <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5c-2-1.2-3.4-1-4.6-.6C5.6 4.5 4.5 6 4.5 8.2c0 1.7.6 2.9 1 4.6.4 1.7.5 4.3 1.2 5.9.3.7.8 1.3 1.4 1.3.9 0 1.1-1.6 1.4-3.3.2-1.2.4-2 1.1-2s.9.8 1.1 2c.3 1.7.5 3.3 1.4 3.3.6 0 1.1-.6 1.4-1.3.7-1.6.8-4.2 1.2-5.9.4-1.7 1-2.9 1-4.6 0-2.2-1.1-3.7-2.9-4.3-1.2-.4-2.6-.6-4.6.6Z"/></svg></span>
-      <span>Punto Dental<small>Mendoza</small></span>
+      <span>Punto Dental</span>
     </a>
     <nav aria-label="Principal">
       <ul class="nav-links" id="navLinks">
@@ -411,7 +467,7 @@ footer h4{color:#fff;font-family:var(--font-body);font-weight:700;font-size:.82r
 <section class="cta-band">
   <div class="container">
     <h2>¿Hace rato que no vas al dentista?</h2>
-    <p>Pedí un turno de control en Punto Dental, en el centro de la Ciudad de Mendoza. Revisamos tu boca y, si hace falta algo, te lo explicamos con el presupuesto por escrito.</p>
+    <p>Pedí un turno de control en Punto Dental, en el centro de Mendoza. Revisamos tu boca y, si hace falta algo, te lo explicamos con el presupuesto por escrito.</p>
     <div class="cta-actions">
       <a href="/#contacto" class="btn btn-light">Pedir un turno</a>
       <a href="https://wa.me/5492610000000" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.5)">Escribir por WhatsApp</a>
@@ -424,8 +480,8 @@ footer h4{color:#fff;font-family:var(--font-body);font-weight:700;font-size:.82r
   <div class="container">
     <div class="foot-grid">
       <div>
-        <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5c-2-1.2-3.4-1-4.6-.6C5.6 4.5 4.5 6 4.5 8.2c0 1.7.6 2.9 1 4.6.4 1.7.5 4.3 1.2 5.9.3.7.8 1.3 1.4 1.3.9 0 1.1-1.6 1.4-3.3.2-1.2.4-2 1.1-2s.9.8 1.1 2c.3 1.7.5 3.3 1.4 3.3.6 0 1.1-.6 1.4-1.3.7-1.6.8-4.2 1.2-5.9.4-1.7 1-2.9 1-4.6 0-2.2-1.1-3.7-2.9-4.3-1.2-.4-2.6-.6-4.6.6Z"/></svg></span><span>Punto Dental<small>Mendoza</small></span></div>
-        <p class="foot-about">Clínica dental para toda la familia en el centro de la Ciudad de Mendoza. Presupuesto claro, todo en un solo lugar y trato humano de verdad.</p>
+        <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5c-2-1.2-3.4-1-4.6-.6C5.6 4.5 4.5 6 4.5 8.2c0 1.7.6 2.9 1 4.6.4 1.7.5 4.3 1.2 5.9.3.7.8 1.3 1.4 1.3.9 0 1.1-1.6 1.4-3.3.2-1.2.4-2 1.1-2s.9.8 1.1 2c.3 1.7.5 3.3 1.4 3.3.6 0 1.1-.6 1.4-1.3.7-1.6.8-4.2 1.2-5.9.4-1.7 1-2.9 1-4.6 0-2.2-1.1-3.7-2.9-4.3-1.2-.4-2.6-.6-4.6.6Z"/></svg></span><span>Punto Dental</span></div>
+        <p class="foot-about">Clínica dental para toda la familia en el centro de Mendoza. Presupuesto claro, todo en un solo lugar y trato humano de verdad.</p>
       </div>
       <div>
         <h4>Servicios</h4>
